@@ -39,7 +39,7 @@ class="zombie-image" id="zombie${zombieId}">`
 let zombie = document.getElementById(`zombie${zombieId}`)
 zombie.style.transform = `translateX(${getRandomimg(15,75)}vw)`
 zombie.onclick = () =>{
-    zombieDestruct(zombie)
+    zombieDestroy(zombie)
 }
 }
 // Iteration 3: Write a function to check if the player missed a zombie
@@ -47,12 +47,12 @@ function check(zombie){
     if(zombie.getBoundingClientRect().top<=0){
         xlives--;
         return true;
-        console.log(xlives)
+        //console.log(xlives)
     }
     return false;   
 }
 // Iteration 4: Write a function to destroy a zombie when it is shot or missed
-function zombieDestruct(zombie){
+function zombieDestroy(zombie){
     zombie.style.display = 'none'
     zombieId++
     createZombie()
@@ -64,7 +64,7 @@ let timer = setInterval(function(){
     document.getElementById("timer").textContent = seconds
     let zombie = document.getElementById(`zombie${zombieId}`)
     if(check(zombie)==true){
-        zombieDestruct(zombie)
+        zombieDestroy(zombie)
         if(xlives==0){
             clearInterval(timer)
             location.href='./game-over.html'
@@ -76,17 +76,7 @@ let timer = setInterval(function(){
     }
 
 },1000)
-
 function lesser(){
 let decreaseBar = document.getElementById("max-lives")
     decreaseBar.style.width = `${xlives*25}vw`
-    // xlives--
 }
-// Iteration 6: Write a code to start the game by calling the first zombie
-makeZombie(zombieId);
-// Iteration 7: Write the helper function to get random integer
-function getRandomimg(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; 
-  }
